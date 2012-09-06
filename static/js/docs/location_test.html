@@ -1,0 +1,61 @@
+<!DOCTYPE html>  <html> <head>   <title>location_test.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="app.html">                 app.js               </a>                                           <a class="source" href="app.loader.html">                 app.loader.js               </a>                                           <a class="source" href="location_dev.html">                 location_dev.js               </a>                                           <a class="source" href="location_prod.html">                 location_prod.js               </a>                                           <a class="source" href="location_test.html">                 location_test.js               </a>                                           <a class="source" href="workspace.html">                 workspace.js               </a>                                           <a class="source" href="testapp.html">                 testapp.js               </a>                                           <a class="source" href="hint.html">                 hint.js               </a>                                           <a class="source" href="pad.html">                 pad.js               </a>                                           <a class="source" href="popup.html">                 popup.js               </a>                                           <a class="source" href="workspace.html">                 workspace.js               </a>                                           <a class="source" href="core.html">                 core.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               location_test.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <p>Все урлы должны заканчиваться "/", кроме тех что указываются в allowedPaths</p>
+
+<p>Доступные параметры:
+app (не обязательный параметр) - адрес куда приложение будет посылать все запросы, если сервисы находятся не рутовом урле;
+Пример: 
+    locations: {
+        app: 'http://localhost/bauhaus/'
+    }</p>
+
+<p>static (не обязательный параметр) - адрес откуда должны грузится все файлы, если он отличается от того что указан в app;
+Пример: 
+    locations: {
+        app: 'http://localhost/bauhaus/',
+        static: 'http://localhost/bauhaus/Content/'
+    }</p>
+
+<p>allowedPaths (не обязательный параметр) - массив состоящий из pathname на которых приложение может запускаться относительно корня указанного в app.
+Пример: 
+    locations: {
+        app: 'http://localhost/bauhaus/',
+        allowedPaths: ['/', '/bauhaus']
+    }</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">TestApp</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="nx">debugMode</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+	<span class="nx">locations</span><span class="o">:</span> <span class="p">{</span>
+		<span class="nx">app</span><span class="o">:</span> <span class="s1">&#39;http://bauhaus-dev.parcsis.net/&#39;</span><span class="p">,</span>
+		<span class="kr">static</span><span class="o">:</span> <span class="s1">&#39;http://bauhaus-dev.parcsis.net/Content/&#39;</span>
+	<span class="p">},</span>
+	<span class="nx">exports</span><span class="o">:</span> <span class="p">{},</span>
+	<span class="nx">resources</span><span class="o">:</span> <span class="p">{</span>
+		<span class="nx">common</span><span class="o">:</span> <span class="p">[</span>
+			<span class="p">{</span>
+				<span class="nx">load</span><span class="o">:</span> <span class="p">[</span>
+					<span class="s1">&#39;main.css&#39;</span><span class="p">,</span>
+					<span class="s1">&#39;common/bootstrap_tooltip.css&#39;</span><span class="p">,</span>
+					<span class="s1">&#39;ie!ie.css&#39;</span>
+				<span class="p">]</span>
+			<span class="p">},</span>
+			<span class="p">{</span>
+				<span class="nx">load</span><span class="o">:</span> <span class="p">[</span>
+					<span class="s1">&#39;libs/jquery/jquery.mockjson.js&#39;</span><span class="p">,</span>
+					<span class="s1">&#39;libs/jquery/jquery.caret.min.js&#39;</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Подгружаем правила шаблонизации для mockJSON</p>             </td>             <td class="code">               <div class="highlight"><pre>					<span class="s1">&#39;tests/mock.js&#39;</span>
+				<span class="p">]</span>
+			<span class="p">}</span>
+		<span class="p">],</span>
+		<span class="nx">app</span><span class="o">:</span> <span class="p">[</span>
+			<span class="p">{</span>
+				<span class="nx">load</span><span class="o">:</span> <span class="p">[</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Libs Section</p>             </td>             <td class="code">               <div class="highlight"><pre>					<span class="s1">&#39;libs/hcf-layout.js&#39;</span><span class="p">,</span>
+					<span class="s1">&#39;libs/bootstrap-tooltip.js&#39;</span><span class="p">,</span>
+					<span class="s1">&#39;libs/raphael/raphael.min.js&#39;</span><span class="p">,</span>
+					<span class="s1">&#39;libs/raphael/raphael.json.js&#39;</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Models Section
+'models/user.js',</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Collections Section
+'collections/works.js',</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>Views Section</p>             </td>             <td class="code">               <div class="highlight"><pre>					<span class="s1">&#39;views/popup.js&#39;</span><span class="p">,</span>
+					<span class="s1">&#39;views/hint.js&#39;</span><span class="p">,</span>
+					<span class="s1">&#39;views/pad.js&#39;</span>
+				<span class="p">]</span>
+			<span class="p">}</span>
+		<span class="p">]</span>
+	<span class="p">}</span>
+<span class="p">};</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

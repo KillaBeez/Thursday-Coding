@@ -1,0 +1,137 @@
+<!DOCTYPE html>  <html> <head>   <title>testapp.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="app.html">                 app.js               </a>                                           <a class="source" href="app.loader.html">                 app.loader.js               </a>                                           <a class="source" href="location_dev.html">                 location_dev.js               </a>                                           <a class="source" href="location_prod.html">                 location_prod.js               </a>                                           <a class="source" href="location_test.html">                 location_test.js               </a>                                           <a class="source" href="workspace.html">                 workspace.js               </a>                                           <a class="source" href="testapp.html">                 testapp.js               </a>                                           <a class="source" href="hint.html">                 hint.js               </a>                                           <a class="source" href="pad.html">                 pad.js               </a>                                           <a class="source" href="popup.html">                 popup.js               </a>                                           <a class="source" href="workspace.html">                 workspace.js               </a>                                           <a class="source" href="core.html">                 core.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               testapp.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="nb">window</span><span class="p">[</span><span class="s1">&#39;WebApp&#39;</span><span class="p">]</span> <span class="o">||</span> <span class="p">(</span><span class="nb">window</span><span class="p">[</span><span class="s1">&#39;WebApp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{});</span>
+<span class="p">(</span><span class="nb">window</span><span class="p">[</span><span class="s1">&#39;WebApp&#39;</span><span class="p">][</span><span class="s1">&#39;TestApp&#39;</span><span class="p">]</span> <span class="o">||</span> <span class="p">{}).</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Объявление значений по умолчанию</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="nx">hosts</span><span class="o">:</span> <span class="p">{</span>
+		<span class="nx">request</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+		<span class="nx">init</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+		<span class="nx">img</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+		<span class="nx">css</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+		<span class="nx">js</span><span class="o">:</span> <span class="s1">&#39;/&#39;</span>
+	<span class="p">},</span>
+	<span class="nx">debugMode</span><span class="o">:</span> <span class="nx">NO</span><span class="p">,</span>
+	<span class="nx">strictMode</span><span class="o">:</span> <span class="nx">YES</span><span class="p">,</span>
+	<span class="nx">rootHost</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+	<span class="nx">container</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Кастомный обработчик ошибок с указанием режима дебага или продакшна</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="nx">errorHandler</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">file</span><span class="p">,</span> <span class="nx">lineNum</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">debugMode</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="nx">message</span> <span class="o">+</span> <span class="s1">&#39;&quot; on line: &#39;</span> <span class="o">+</span> <span class="nx">lineNum</span> <span class="o">+</span> <span class="s1">&#39; in &#39;</span> <span class="o">+</span> <span class="nx">file</span><span class="p">);</span>
+			<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Разбиваем число на разряды</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="nx">pritifyPrice</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">price</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">price</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">price</span> <span class="o">+=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+			<span class="kd">var</span> <span class="nx">priceArr</span> <span class="o">=</span> <span class="nx">price</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="sr">/,|\./</span><span class="p">);</span>
+
+			<span class="k">if</span> <span class="p">(</span><span class="nx">priceArr</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">return</span> <span class="kc">NaN</span><span class="p">;</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="nx">priceArr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">?</span> <span class="p">(</span><span class="nx">priceArr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span> <span class="o">+</span> <span class="nx">priceArr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">:</span> <span class="p">(</span><span class="nx">priceArr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+				<span class="nx">price</span> <span class="o">=</span> <span class="nx">priceArr</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+
+				<span class="kd">var</span> <span class="nx">modulo</span> <span class="o">=</span> <span class="nx">price</span><span class="p">.</span><span class="nx">length</span> <span class="o">%</span> <span class="mi">3</span><span class="p">,</span>
+					<span class="nx">first</span> <span class="o">=</span> <span class="nx">price</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">modulo</span><span class="p">),</span>
+					<span class="nx">second</span> <span class="o">=</span> <span class="nx">price</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">modulo</span><span class="p">);</span>
+
+				<span class="k">return</span> <span class="p">(</span><span class="nx">first</span> <span class="o">+</span> <span class="nx">second</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/(\d{1,3})/g</span><span class="p">,</span> <span class="s1">&#39; $1&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="nx">priceArr</span><span class="p">[</span><span class="mi">1</span><span class="p">]).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^\s+|\s+$/g</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="nx">price</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Кроссбраузерный метод выставления курсора у инпута в самый конец текста.
+В качестве аргумента принимается ссылка DOM элемент инпута</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="nx">placeCaretAtEnd</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">placeCaretAt</span><span class="p">(</span><span class="nx">input</span><span class="p">,</span> <span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+	<span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>Кроссбраузерный метод выставления курсора у инпута в указанную позицию
+В качестве аргументов принимается ссылка DOM элемент инпута, а так же желаемая позиция</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="nx">placeCaretAt</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">input</span><span class="p">,</span> <span class="nx">position</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">selectionStart</span> <span class="o">=</span> <span class="nx">position</span><span class="p">,</span>
+			<span class="nx">selectionEnd</span> <span class="o">=</span> <span class="nx">position</span><span class="p">;</span>
+
+		<span class="k">if</span> <span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">setSelectionRange</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">input</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+			<span class="nx">input</span><span class="p">.</span><span class="nx">setSelectionRange</span><span class="p">(</span><span class="nx">selectionStart</span><span class="p">,</span> <span class="nx">selectionEnd</span><span class="p">);</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">input</span><span class="p">.</span><span class="nx">createTextRange</span><span class="p">)</span> <span class="p">{</span>
+			<span class="kd">var</span> <span class="nx">range</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">createTextRange</span><span class="p">();</span>
+			<span class="nx">range</span><span class="p">.</span><span class="nx">collapse</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+			<span class="nx">range</span><span class="p">.</span><span class="nx">moveEnd</span><span class="p">(</span><span class="s1">&#39;character&#39;</span><span class="p">,</span> <span class="nx">selectionEnd</span><span class="p">);</span>
+			<span class="nx">range</span><span class="p">.</span><span class="nx">moveStart</span><span class="p">(</span><span class="s1">&#39;character&#39;</span><span class="p">,</span> <span class="nx">selectionStart</span><span class="p">);</span>
+			<span class="nx">range</span><span class="p">.</span><span class="nx">select</span><span class="p">();</span>
+		<span class="p">}</span>
+	<span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <h2>Описание параметров предзагрузчика изображений:</h2>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Ссылка на DOM элемент картинки (<img/>) или на jQuery объект с картинками для которых нужно 
+загрузить изображения. Если будет передан null/false/undefined, то изображение будет 
+загружатся не привязываясь к какому либо тегу, после чего его можно будет вставить по событию 
+onLoad.
+    images: el/$el/null</p>
+
+<p>Ссылка на загружаемое изображение. Если этот параметр не передан, то должен быть обязательно 
+передан метод params.getUrl, который должен возвращать ссылку на изобажение иначе загрузка 
+изображения будет отменено.
+    url: string</p>
+
+<p>Объект с параметрами для загрузчика. Если внутри передан метод getUrl(), то может 
+передаваться вместо аргумента url.
+    params: {
+Метод, который должен возвращать ссылку на загружаемое изображение для текущей картинки 
+используется если необходимо сделать загрузку множества файлов. В качестве аргументов 
+передается ссылка на jQuery объект обрабатываемого <img/>.
+        getUrl: fn(image)</p>
+
+<p>Метод, который вызывается перед началом загрузку изображения. Позволяет выполнять внутри 
+анимация из-за чего после выполнения всех действий необходимо вызвать функцию callback, 
+которая передается в параметрах иначе изображение не будет загружатся. В качестве 
+аргументов передается ссылка на jQuery объект обрабатываемого <img/> и функция callback, 
+которая продолжает операцию по загрузке изображения.
+        onStart: fn(image, callback)</p>
+
+<p>Метод который вызывается по завершению загрузки изображения. В качестве аргументов 
+передается ссылка на jQuery объект обрабатываемого <img/>.
+        onLoad: fn(image)
+    }</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="nx">preloadImages</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">images</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">images</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">images</span> <span class="o">||</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">));</span>
+
+		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">images</span><span class="p">.</span><span class="nx">length</span> <span class="o">||</span> <span class="o">!</span><span class="nx">url</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+		<span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+			<span class="nx">handler</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">onLoad</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">params</span><span class="p">.</span><span class="nx">onLoad</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">off</span><span class="p">(</span><span class="s1">&#39;.preloader&#39;</span><span class="p">));</span>
+				<span class="p">}</span>
+			<span class="p">},</span>
+			<span class="nx">load</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">handler</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>Выставляем изображению урл для загрузки изображения</p>             </td>             <td class="code">               <div class="highlight"><pre>				<span class="nx">target</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>Если изображение загруженно, то сразу вызываем обработчик загрузки.
+Если нет, то навешиваем событие на загрузку изображения.</p>             </td>             <td class="code">               <div class="highlight"><pre>				<span class="k">if</span> <span class="p">(</span><span class="nx">target</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">complete</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">handler</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">target</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">{});</span>
+				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+					<span class="nx">target</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;load.preloader&#39;</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">},</span>
+			<span class="nx">getImg</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">handler</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">onStart</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">params</span><span class="p">.</span><span class="nx">onStart</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+						<span class="nx">load</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">t</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">u</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">h</span><span class="p">);</span>
+					<span class="p">},</span> <span class="p">{</span>
+						<span class="nx">u</span><span class="o">:</span> <span class="nx">url</span><span class="p">,</span>
+						<span class="nx">t</span><span class="o">:</span> <span class="nx">target</span><span class="p">,</span>
+						<span class="nx">h</span><span class="o">:</span> <span class="nx">handler</span>
+					<span class="p">}));</span>
+				<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+					<span class="nx">load</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">};</span>
+
+		<span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">params</span> <span class="o">=</span> <span class="nx">url</span><span class="p">;</span>
+			<span class="nx">url</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+		<span class="p">}</span>
+
+		<span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">getImg</span><span class="p">(</span><span class="nx">images</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">params</span><span class="p">.</span><span class="nx">getUrl</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">images</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="nx">image</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">image</span> <span class="o">=</span> <span class="nx">images</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+					<span class="nx">getImg</span><span class="p">(</span><span class="nx">image</span><span class="p">,</span> <span class="nx">params</span><span class="p">.</span><span class="nx">getUrl</span><span class="p">(</span><span class="nx">image</span><span class="p">),</span> <span class="nx">handler</span><span class="p">);</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">};</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

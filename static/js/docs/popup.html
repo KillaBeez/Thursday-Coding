@@ -1,0 +1,84 @@
+<!DOCTYPE html>  <html> <head>   <title>popup.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="app.html">                 app.js               </a>                                           <a class="source" href="app.loader.html">                 app.loader.js               </a>                                           <a class="source" href="location_dev.html">                 location_dev.js               </a>                                           <a class="source" href="location_prod.html">                 location_prod.js               </a>                                           <a class="source" href="location_test.html">                 location_test.js               </a>                                           <a class="source" href="workspace.html">                 workspace.js               </a>                                           <a class="source" href="testapp.html">                 testapp.js               </a>                                           <a class="source" href="hint.html">                 hint.js               </a>                                           <a class="source" href="pad.html">                 pad.js               </a>                                           <a class="source" href="popup.html">                 popup.js               </a>                                           <a class="source" href="workspace.html">                 workspace.js               </a>                                           <a class="source" href="core.html">                 core.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               popup.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">Views</span><span class="p">.</span><span class="nx">Popup</span> <span class="o">=</span> <span class="nx">App</span><span class="p">.</span><span class="nx">global</span><span class="p">.</span><span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+	<span class="nx">className</span><span class="o">:</span> <span class="s1">&#39;b-popup-container&#39;</span><span class="p">,</span>
+	<span class="nx">template</span><span class="o">:</span> <span class="s1">&#39;#popup-template&#39;</span><span class="p">,</span>
+
+	<span class="nx">events</span><span class="o">:</span> <span class="p">{</span>
+		<span class="s1">&#39;click .b-popup-close&#39;</span><span class="o">:</span> <span class="s1">&#39;unload&#39;</span>
+	<span class="p">},</span>
+
+	<span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">contentBundle</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Навешиваем событие на глобальное выстреливание mousedown</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">__document</span><span class="p">)</span>
+			<span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;mousedown.&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">__bundleName</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">onMouseDown</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">))</span>
+			<span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup.&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">__bundleName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">keyCode</span> <span class="o">==</span> <span class="mi">27</span><span class="p">)</span> <span class="p">{</span>
+					<span class="k">this</span><span class="p">.</span><span class="nx">unload</span><span class="p">();</span>
+				<span class="p">}</span>
+			<span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+	<span class="p">},</span>
+
+	<span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">el</span><span class="p">),</span>
+			<span class="nx">bundleParams</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">bundleParams</span> <span class="o">||</span> <span class="p">{},</span>
+			<span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+				<span class="nx">title</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">title</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span>
+			<span class="p">};</span>
+
+		<span class="nx">container</span>
+			<span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span>
+			<span class="p">.</span><span class="nx">appendTo</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">core</span><span class="p">.</span><span class="nx">container</span><span class="p">);</span>
+
+		<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">bundleName</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">core</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">bundleName</span><span class="p">).</span><span class="nx">isDummy</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Создаем вью содержимого и сохраняем ее в переменную this.contentBundle</p>             </td>             <td class="code">               <div class="highlight"><pre>			<span class="k">this</span><span class="p">.</span><span class="nx">contentBundle</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">core</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">bundleName</span><span class="p">,</span> <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+				<span class="nx">el</span><span class="o">:</span> <span class="nx">container</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.b-popup-content&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+			<span class="p">},</span> <span class="nx">bundleParams</span><span class="p">));</span>
+		<span class="p">}</span>
+		<span class="nx">container</span>
+			<span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.b-popup-animation_layer&#39;</span><span class="p">)</span>
+			<span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;margin-top&#39;</span><span class="p">,</span> <span class="nx">screen</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span>
+			<span class="p">.</span><span class="nx">animate</span><span class="p">({</span>
+				<span class="nx">marginTop</span><span class="o">:</span> <span class="mi">0</span>
+			<span class="p">},</span> <span class="s1">&#39;fast&#39;</span><span class="p">);</span>
+
+		<span class="nx">container</span>
+			<span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.b-popup-splash&#39;</span><span class="p">)</span>
+			<span class="p">.</span><span class="nx">fadeIn</span><span class="p">(</span><span class="s1">&#39;fast&#39;</span><span class="p">);</span>
+	<span class="p">},</span>
+
+	<span class="nx">beforeUnload</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">__document</span><span class="p">).</span><span class="nx">off</span><span class="p">(</span><span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">__bundleName</span><span class="p">);</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+	<span class="p">},</span>
+
+	<span class="nx">remove</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">el</span><span class="p">),</span>
+			<span class="nx">content</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">contentBundle</span><span class="p">;</span>
+			<span class="nx">isRendered</span> <span class="o">=</span> <span class="o">!!</span><span class="nx">container</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">).</span><span class="nx">length</span><span class="p">,</span>
+			<span class="nx">name</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">bundleName</span><span class="p">;</span>
+
+		<span class="k">if</span> <span class="p">(</span><span class="nx">isRendered</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">container</span>
+				<span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.b-popup-animation_layer&#39;</span><span class="p">)</span>
+				<span class="p">.</span><span class="nx">animate</span><span class="p">({</span>
+					<span class="nx">marginTop</span><span class="o">:</span> <span class="nx">screen</span><span class="p">.</span><span class="nx">height</span>
+				<span class="p">},</span> <span class="s1">&#39;fast&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+					<span class="nx">content</span> <span class="o">&amp;&amp;</span> <span class="nx">content</span><span class="p">.</span><span class="nx">view</span> <span class="o">&amp;&amp;</span> <span class="nx">content</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">unload</span> <span class="o">&amp;&amp;</span> <span class="nx">content</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">unload</span><span class="p">();</span>
+					<span class="nx">container</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+				<span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+
+			<span class="nx">container</span>
+				<span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;.b-popup-splash&#39;</span><span class="p">)</span>
+				<span class="p">.</span><span class="nx">fadeOut</span><span class="p">(</span><span class="s1">&#39;fast&#39;</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+	<span class="p">},</span>
+
+	<span class="nx">onMouseDown</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+
+		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">target</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="s1">&#39;.b-popup&#39;</span><span class="p">).</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">unload</span><span class="p">();</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">});</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
