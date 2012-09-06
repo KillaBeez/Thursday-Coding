@@ -35,6 +35,19 @@
 				<div class="l-content g-scrollable" id="l-body"></div>
 				<div class="l-footer" id="l-footer"></div>
 			</script>
+
+			<script id="list-template" type="text/x-handlebars-template">
+				<input type="text" name="q" />
+				<ul class="b-list">
+					{{#each list}}
+						<li class="b-list_item" id="list-item-{{Id}}" data-id="{{Id}}">{{Title}}<br />{{Description}}</li>
+					{{/each}}
+				</ul>
+			</script>
+
+			<script id="item-template" type="text/x-handlebars-template">
+				123123123{{Title}}
+			</script>
 		<!-- Template Section -->
 	</body>
 </html>

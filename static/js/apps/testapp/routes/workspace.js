@@ -18,6 +18,9 @@ App.Routers.Workspace = App.global.Backbone.Router.extend({
 	// Метод для инициализации бандлов. Вызывается после инициализации роутера
 	createBundles: function(initData) {
 		this.core
+			.set('List')
+			.set('Item');
+
 			// Создаем источники данных
 			/*.set('User', {
 				view: NO,
@@ -53,9 +56,9 @@ App.Routers.Workspace = App.global.Backbone.Router.extend({
 
 		if (this.checkData(name)) {
 			this.navigate(location.join('/'));
-			/*this.core
+			this.core
 				.unload()
-				.renderStream(['Header']);*/
+				.renderStream(['List', 'Item']);
 		}
 	}
 });

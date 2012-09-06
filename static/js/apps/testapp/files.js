@@ -23,13 +23,16 @@ window.TestApp.resources = {
 				'libs/hcf-layout.js',
 
 				// Models Section
-				//'models/user.js',
+				'models/list.js',
+				'models/item.js',
+				'models/list_item.js',
 
 				// Collections Section
-				//'collections/works.js',
+				'collections/lists.js',
 
 				// Views Section
-				//'views/popup.js',
+				'views/list.js',
+				'views/item.js'
 			]
 		}
 	]
